@@ -45,6 +45,7 @@ function menu() {
 }
 
 
+
 function binario() {
     console.clear();
     rl.question(chalk.cyan.bgBlack("ingrese el valor en binario : "), (numero) => {
@@ -64,9 +65,19 @@ function binario() {
 
 function decimal() {
     console.clear();
-    rl.question("Ingrese el valor en decimal ", (numero) => {
+    rl.question("Ingrese el valor en decimal (numero entero) : ", (numero) => {
         console.clear();
-        const nDecimal = parseInt(numero, 10); // Ensure it's a valid number
+        if (isNaN(numero) || !typeof numero === "number") {
+            console.log(chalk.red("\n--- El valor ingresado no es un numero ---\n"));
+            setTimeout(menu, 2500);
+            return;
+        }
+        if (!Number.isInteger(numero)) {
+            console.log(chalk.red("\n--- El valor ingresado no es un numero entero ---\n"));
+            setTimeout(menu, 2500);
+            return;
+        }
+        const nDecimal = (numero, 10); // Ensure it's a valid number
         const nBinario = nDecimal.toString(2); // Convert to binary string
         console.log(chalk.cyan.bgBlack(`\n-- El valor en decimal: `+ chalk.greenBright(nDecimal) + ` --\n`));
         console.log(chalk.cyan.bgBlack(`\n-- El valor en binario: ` + chalk.greenBright(nBinario) + ` --\n`));
